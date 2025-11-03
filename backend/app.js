@@ -1,13 +1,13 @@
 import express from "express";
 import bodyParser from "body-parser";
 import {config} from "dotenv";
-import {checkConnection} from "./db/connection.js";
+import checkConnection from "./db/connection.js";
+import errorHandler from "./middlewares/errorHandler.js";
 
 // Initialize environment variables
 config();
 
 const app = express();
-
 // Middleware
 app.use(bodyParser.json());
 
@@ -17,13 +17,7 @@ app.get("/", (req, res) => {
 });
 
 // Global Error Handling Middleware
-app.use((error, req, res, next) => {
-    const status = error.statusCode || 500;
-    const message = error.message;
-    const data = error.data;
-
-    res.status(status).json({success: false, message: message, data: data});
-});
+app.use(errorHandler);
 
 // DB Connection
 (async () => {

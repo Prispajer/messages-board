@@ -1,6 +1,6 @@
 import sequelize from "././sequelize.js";
 
-export const checkConnection = async () => {
+const checkConnection = async () => {
     try {
         await sequelize.authenticate();
         console.log("Database connection established.");
@@ -9,3 +9,5 @@ export const checkConnection = async () => {
         process.exit(1);
     }
 };
+
+export default checkConnection;
