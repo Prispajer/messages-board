@@ -1,13 +1,26 @@
-import sequelize from "././sequelize.js";
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
-const checkConnection = async () => {
+dotenv.config();
+
+const sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
+    {
+        dialect: "mysql",
+        port: 3306,
+        host: process.env.DB_HOST
+    }
+);
+
+export const checkConnection = async () => {
     try {
         await sequelize.authenticate();
         console.log("Database connection established.");
-    } catch (error) {
-        console.error("Unable to connect to the database:", error);
-        process.exit(1);
+    } catch (err) {
+        console.error("Unable to connect to the database:", err);
     }
 };
 
-export default checkConnection;
+export default sequelize;
