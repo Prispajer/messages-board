@@ -1,26 +1,21 @@
 ﻿"use client";
 
-import {Button} from "@/components/ui/button";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table";
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import {Pencil, Trash2} from "lucide-react";
+import {EditMessageDialog} from "@/features/messages/components/EditMessageDialog";
 import {useGetMessagesQuery} from "@/features/messages/api/messagesApi";
+import type {Message} from "../types/message";
+import DeleteMessageDialog from "@/features/messages/components/DeleteMessageDialog";
 
 export const MessageTable = () => {
-    const {data: messages, isLoading, isError, error} = useGetMessagesQuery();
+    const {data: messages, isLoading, isError} = useGetMessagesQuery();
 
-    if (isLoading) return <p>Ładowanie…</p>;
-    if (isError) return <p>Błąd: {JSON.stringify(error)}</p>;
+    if (isLoading) {
+        return <p>Ładowanie wiadomości…</p>;
+    }
+
+    if (isError) {
+        return <p>Nie udało się pobrać wiadomości.</p>;
+    }
 
     if (!messages || messages.length === 0) {
         return (
@@ -46,51 +41,19 @@ export const MessageTable = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {messages.map((msg: { id: number; content: string }) => (
-                        <TableRow key={msg.id}>
+                    {messages.map((msg: Message) => (
+                        <TableRow key={msg.id} className="min-h-[56px]">
                             <TableCell className="font-medium">{msg.id}</TableCell>
-                            <TableCell className="max-w-md">
-                                <p className="line-clamp-2">{msg.content}</p>
+                            <TableCell className="max-w-md break-words whitespace-pre-wrap">
+                                {msg.content}
                             </TableCell>
-                            <TableCell>
-                                <div className="flex justify-end gap-2">
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        className="hover:bg-accent hover:text-accent-foreground"
-                                    >
-                                        <Pencil className="h-4 w-4"/>
-                                    </Button>
-
-                                    <AlertDialog>
-                                        <AlertDialogTrigger asChild>
-                                            <Button
-                                                variant="outline"
-                                                size="sm"
-                                                className="hover:bg-destructive hover:text-destructive-foreground"
-                                            >
-                                                <Trash2 className="h-4 w-4"/>
-                                            </Button>
-                                        </AlertDialogTrigger>
-                                        <AlertDialogContent>
-                                            <AlertDialogHeader>
-                                                <AlertDialogTitle>
-                                                    Czy na pewno chcesz usunąć?
-                                                </AlertDialogTitle>
-                                                <AlertDialogDescription>
-                                                    Ta akcja jest nieodwracalna. Wiadomość zostanie
-                                                    trwale usunięta z systemu.
-                                                </AlertDialogDescription>
-                                            </AlertDialogHeader>
-                                            <AlertDialogFooter>
-                                                <AlertDialogCancel>Anuluj</AlertDialogCancel>
-                                                <AlertDialogAction
-                                                    className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-                                                    Usuń
-                                                </AlertDialogAction>
-                                            </AlertDialogFooter>
-                                        </AlertDialogContent>
-                                    </AlertDialog>
+                            <TableCell className="w-[140px]">
+                                <div className="flex justify-center items-center gap-2">
+                                    <EditMessageDialog
+                                        id={msg.id}
+                                        initialContent={msg.content}
+                                    />
+                                    <DeleteMessageDialog id={msg.id}/>
                                 </div>
                             </TableCell>
                         </TableRow>
