@@ -28,7 +28,7 @@ services:
     build:
       context: backend
       dockerfile: Dockerfile
-    command: sh -c "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm start"
+    command: /wait-for-it.sh db:3306 -- sh -c "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm start"
     ports:
       - "8080:8080"
     networks:
