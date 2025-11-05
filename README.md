@@ -2,7 +2,8 @@
 
 ## 🎯 Cel
 
-Rozbudowa istniejącego projektu poprzez implementację formularza do dodawania wiadomości do bazy danych. Dodatkowo, wiadomości powinny być wyświetlane w tabeli z następującymi kolumnami: **ID**, **Wiadomość**, **Akcje**.
+Rozbudowa istniejącego projektu poprzez implementację formularza do dodawania wiadomości do bazy danych. Dodatkowo,
+wiadomości powinny być wyświetlane w tabeli z następującymi kolumnami: **ID**, **Wiadomość**, **Akcje**.
 
 ---
 
@@ -27,21 +28,21 @@ Rozbudowa istniejącego projektu poprzez implementację formularza do dodawania 
 
 - Tabela z kolumnami: **ID**, **Wiadomość**, **Akcje**.
 - Kolumna **Akcje** zawiera:
-  - 🔧 **Edytuj** – otwiera popup z formularzem do edycji wiadomości.
-  - ❌ **Usuń** – usuwa wiadomość po potwierdzeniu.
+    - 🔧 **Edytuj** – otwiera popup z formularzem do edycji wiadomości.
+    - ❌ **Usuń** – usuwa wiadomość po potwierdzeniu.
 
 ### 🖥️ Backend
 
 - Własna implementacja obsługi zapytań do bazy danych (dodawanie, edytowanie, usuwanie).
 - **Zamień `sequelize.sync()` na migracje (`sequelize-cli`)**:
-  - Model wiadomości musi być utworzony przez migrację.
-  - W kodzie nie może być używany `sequelize.sync()`.
+    - Model wiadomości musi być utworzony przez migrację.
+    - W kodzie nie może być używany `sequelize.sync()`.
 - **Dodaj seeder**:
-  - Seeder dodający przynajmniej 3 przykładowe wiadomości.
-  - Możliwość uruchomienia przez:
-    ```bash
-    npx sequelize-cli db:seed:all
-    ```
+    - Seeder dodający przynajmniej 3 przykładowe wiadomości.
+    - Możliwość uruchomienia przez:
+      ```bash
+      npx sequelize-cli db:seed:all
+      ```
 
 ### 🔌 RTK Query
 
@@ -76,7 +77,7 @@ docker compose up
 2. Po zakończeniu zadania utwórz pull request `dev → main`.
 3. Dodaj użytkownika `@BiznesportTech` jako **reviewera**.
 4. Upewnij się, że `@BiznesportTech` ma dostęp do repozytorium:
-   - `Settings → Collaborators → Invite a collaborator`.
+    - `Settings → Collaborators → Invite a collaborator`.
 
 ---
 
@@ -95,15 +96,15 @@ Zadanie będzie oceniane na podstawie:
 
 ## ✅ Checklista przed wysłaniem
 
-- [ ] Formularz dodaje wiadomości do bazy.
-- [ ] Edycja i usuwanie działają zgodnie z wymaganiami.
-- [ ] Brak `sequelize.sync()` – użyte migracje.
-- [ ] Seeder dodaje min. 3 wiadomości.
-- [ ] Frontend korzysta z RTK Query.
-- [ ] UI zbudowane z komponentów ShadCN.
-- [ ] Projekt uruchamia się poprawnie przez `docker compose up`.
-- [ ] Pull request z `dev` do `main` gotowy.
-- [ ] `@BiznesportTech` dodany jako współpracownik i reviewer.
+- [x] Formularz dodaje wiadomości do bazy.
+- [x] Edycja i usuwanie działają zgodnie z wymaganiami.
+- [x] Brak `sequelize.sync()` – użyte migracje.
+- [x] Seeder dodaje min. 3 wiadomości.
+- [x] Frontend korzysta z RTK Query.
+- [x] UI zbudowane z komponentów ShadCN.
+- [x] Projekt uruchamia się poprawnie przez `docker compose up`.
+- [x] Pull request z `dev` do `main` gotowy.
+- [x] `@BiznesportTech` dodany jako współpracownik i reviewer.
 
 ---
 
