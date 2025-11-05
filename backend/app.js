@@ -10,6 +10,7 @@ import errorHandler from "./middlewares/errorHandler.js";
 config();
 
 const app = express();
+
 // Middleware
 app.use(bodyParser.json());
 

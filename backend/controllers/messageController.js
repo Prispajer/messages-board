@@ -15,7 +15,7 @@ const updateMessage = async (req, res) => {
     const data = await messagesService.updateMessage(id, req.body);
 
     if (!data) {
-        return res.status(404).json({success: false, error: "Message not found"});
+        return res.status(404).json({success: false, message: "Message not found"});
     }
 
     res.status(200).json({success: true, data});
@@ -26,10 +26,10 @@ const deleteMessage = async (req, res) => {
     const data = await messagesService.deleteMessage(id);
 
     if (!data) {
-        return res.status(404).json({success: false, error: "Message not found"});
+        return res.status(404).json({success: false, message: "Message not found"});
     }
 
-    res.status(200).json({success: true, data: null});
+    res.status(200).json({success: true, data: data});
 };
 
 export default {

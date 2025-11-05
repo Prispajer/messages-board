@@ -1,4 +1,5 @@
 ﻿import Message from "../models/message.js";
+
 const getMessages = async () => {
     return await Message.findAll();
 };
@@ -18,8 +19,8 @@ const deleteMessage = async (id) => {
     const message = await Message.findByPk(id);
     if (!message) return null;
     await message.destroy();
-    return true;
-}
+    return message;
+};
 
 export default {
     getMessages,
