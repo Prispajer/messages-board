@@ -20,6 +20,7 @@ export const checkConnection = async () => {
         console.log("Database connection established.");
     } catch (err) {
         console.error("Unable to connect to the database:", err);
+        process.exit(1);
     }
 };
 
