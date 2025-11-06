@@ -1,110 +1,74 @@
-# 🧩 Zadanie Rekrutacyjne – Aplikacja Wiadomości
+# 📩 Aplikacja Wiadomości
 
-## 🎯 Cel
+Aplikacja do zarządzania wiadomościami (dodawanie, edycja, usuwanie).
+Frontend: RTK Query + ShadCN UI  
+Backend: Node.js + Sequelize (migracje, seedery)
 
-Rozbudowa istniejącego projektu poprzez implementację formularza do dodawania wiadomości do bazy danych. Dodatkowo, wiadomości powinny być wyświetlane w tabeli z następującymi kolumnami: **ID**, **Wiadomość**, **Akcje**.
+## 🚀 Wymagania
+- Node.js v18.17.0+
+- Docker v20.10.11+
+- Sequelize CLI
 
----
+## 🔧 Uruchomienie
 
-## ✅ Wymagania techniczne
-
-- **Node.js v18.17.0+**
-- **Docker v20.10.11+**
-- **Sequelize + migracje (`sequelize-cli`)**
-- **RTK Query (Redux Toolkit Query)**
-- **ShadCN UI (komponenty UI)**
-
----
-
-## 🧠 Zakres zadania
-
-### 📝 Formularz dodawania wiadomości
-
-- Formularz umożliwia wprowadzenie treści wiadomości i dodanie jej do bazy danych.
-- Formularz musi posiadać walidację danych.
-
-### 📄 Tabela wiadomości
-
-- Tabela z kolumnami: **ID**, **Wiadomość**, **Akcje**.
-- Kolumna **Akcje** zawiera:
-  - 🔧 **Edytuj** – otwiera popup z formularzem do edycji wiadomości.
-  - ❌ **Usuń** – usuwa wiadomość po potwierdzeniu.
-
-### 🖥️ Backend
-
-- Własna implementacja obsługi zapytań do bazy danych (dodawanie, edytowanie, usuwanie).
-- **Zamień `sequelize.sync()` na migracje (`sequelize-cli`)**:
-  - Model wiadomości musi być utworzony przez migrację.
-  - W kodzie nie może być używany `sequelize.sync()`.
-- **Dodaj seeder**:
-  - Seeder dodający przynajmniej 3 przykładowe wiadomości.
-  - Możliwość uruchomienia przez:
-    ```bash
-    npx sequelize-cli db:seed:all
-    ```
-
-### 🔌 RTK Query
-
-- Komunikacja frontend ↔ backend musi być oparta w całości o RTK Query.
-
-### 🎨 ShadCN UI
-
-- UI musi korzystać z komponentów biblioteki **ShadCN**.
-- Interfejs powinien być estetyczny, intuicyjny i spójny.
-
----
-
-## 🚀 Uruchomienie projektu
-
-1. Sklonuj repozytorium.
-2. W katalogu głównym uruchom:
-
+### Opcja 1 – Docker (zalecane)
 ```bash
+git clone https://github.com/Prispajer/messages-board.git
+cd messages-board
 docker compose up
 ```
 
-> Po uruchomieniu kontenery powinny:
->
-> - automatycznie wykonać migracje,
-> - umożliwić pracę z aplikacją bez ręcznej konfiguracji.
+⚠️ Uwaga: Najnowsze zmiany znajdują się w branchu `dev`.  
+Aby pobrać aktualną wersję:  
 
----
+```bash
+git clone -b dev https://github.com/Prispajer/messages-board.git
+cd messages-board
+docker compose up
+```
 
-## 📦 Dystrybucja
+### Opcja 2 – Lokalnie 
 
-1. Stwórz osobny branch `dev`.
-2. Po zakończeniu zadania utwórz pull request `dev → main`.
-3. Dodaj użytkownika `@BiznesportTech` jako **reviewera**.
-4. Upewnij się, że `@BiznesportTech` ma dostęp do repozytorium:
-   - `Settings → Collaborators → Invite a collaborator`.
+- Podmiana zmiennej środowiskowej w folderze backend (.env)
+```
+DB_HOST="db" => DB_HOST="localhost"
+```
 
----
+- Zainstaluj zależności:
+```
+npm install
+```
 
-## 🧪 Weryfikacja
+- Uruchom migracje i seedery:
+```
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
+```
 
-Zadanie będzie oceniane na podstawie:
+- Start backendu (cd backend):
+```
+npm run start
+```
 
-- Poprawności działania po `docker compose up`.
-- Braku `sequelize.sync()` – tylko migracje.
-- Poprawnie zaimplementowanych seederów.
-- Czytelności i jakości kodu (frontend + backend).
-- Poprawnej integracji RTK Query i ShadCN UI.
-- Intuicyjności i estetyki interfejsu użytkownika.
+- Start frontendu (cd frontend):
+```
+npm run dev
+```
 
----
+## ✅ Checklista
+- [x] Formularz dodaje wiadomości do bazy (z walidacją).
+- [x] Edycja wiadomości działa (popup).
+- [x] Usuwanie wiadomości działa (z potwierdzeniem).
+- [x] Brak `sequelize.sync()` – użyte migracje.
+- [x] Seeder dodaje min. 3 przykładowe wiadomości (`npx sequelize-cli db:seed:all`).
+- [x] Frontend korzysta z RTK Query.
+- [x] UI zbudowane z komponentów ShadCN.
+- [x] Projekt uruchamia się poprawnie przez `docker compose up`.
+- [x] Branch `dev` → PR do `main` gotowy.
+- [x] Reviewer @BiznesportTech dodany do repozytorium.
 
-## ✅ Checklista przed wysłaniem
-
-- [ ] Formularz dodaje wiadomości do bazy.
-- [ ] Edycja i usuwanie działają zgodnie z wymaganiami.
-- [ ] Brak `sequelize.sync()` – użyte migracje.
-- [ ] Seeder dodaje min. 3 wiadomości.
-- [ ] Frontend korzysta z RTK Query.
-- [ ] UI zbudowane z komponentów ShadCN.
-- [ ] Projekt uruchamia się poprawnie przez `docker compose up`.
-- [ ] Pull request z `dev` do `main` gotowy.
-- [ ] `@BiznesportTech` dodany jako współpracownik i reviewer.
-
----
-
-💡 Powodzenia! W razie pytań skontaktuj się z zespołem BiznesportTech.
+## 📄 Funkcjonalności
+- [x] Dodawanie wiadomości (formularz z walidacją)
+- [x] Edycja wiadomości (popup)
+- [x] Usuwanie wiadomości (z potwierdzeniem)
+- [x] Seeder z przykładowymi danymi (`npx sequelize-cli db:seed:all`)
